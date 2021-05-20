@@ -9,3 +9,7 @@ Technologies used:
 2. Lombok
 3. Thymeleaf
 4. Junit 5 
+
+
+Coverage report for the testing part of project
+![image](https://user-images.githubusercontent.com/80960895/118939493-5eeb8800-b96d-11eb-8f81-e5f9320a3152.png)
