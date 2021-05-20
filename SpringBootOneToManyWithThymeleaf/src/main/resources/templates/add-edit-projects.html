@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Student Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    	<style>
+body {
+	background-image:
+		url('data:image/jpeg;base64,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');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+</style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="#"><i class="fa fa-fw fa-home"></i>
+			Student Management System </a>
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+</nav>
+<br>
+<br>
+	<div class = "container">
+		<div class = "row">
+			<div class ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class="text-center" style="color: #00004d"> CREATE NEW PROJECT</h1>
+				<div class = "card-body">
+
+					  <form action="#" th:action="@{|/createProject/${id}|}" th:object="${project}" method="post">
+						<div class ="form-group">
+							<label> Project Name </label>
+							<input
+							type = "text"
+							name = "projectName"
+							th:field = "*{projectName}"
+							class = "form-control"
+							placeholder="Enter Project Name" required
+							/>
+						</div>
+						<div class ="form-group">
+							<label> Project Technology </label>
+							<input
+							type = "text"
+							name = "technology"
+							th:field = "*{technology}"
+							class = "form-control"
+							placeholder="Enter Technology used" required 
+							/>
+						</div>
+						
+						<div class = "box-footer text-center">
+							<button type="submit" class = "btn btn-success">
+								Submit
+							</button>
+						</div>
+					</form>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

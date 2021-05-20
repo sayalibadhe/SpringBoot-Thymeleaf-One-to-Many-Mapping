@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Student Management System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<style>
+body {
+	background-image:
+		url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsYIxRelx7K8h-KDx4L7iEIA1hq1F9ixIWyA&usqp=CAU');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+tbody {
+	font-style: inherit;
+	width: max-content;
+	font-size: 15px;
+	white-space: nowrap;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: black;
+}
+</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="#"><i class="fa fa-fw fa-home"></i>
+			Student Management System </a>
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link"
+					th:href="@{/createStudentPage}">Add Student</a></li>
+
+			</ul>
+			<form class="form-inline " th:action="@{/search-user-by-id}"
+				method="get">
+				<input class="form-control mr-sm-2" type="number" th:name="id"
+					placeholder="Enter id to search" />
+
+				<button class="btn btn-outline-primary my-2 my-sm-0" type="submit"
+					value="Search">
+					<i class="fa fa-search"></i> Search
+				</button>
+			</form>
+		</div>
+	</nav>
+
+	<div class="container text-center">
+		<div>
+			<h1 class="text-center" style="color: #00004d;">LIST OF STUDENTS
+			</h1>
+		</div>
+
+		<br>
+		<table class="table table-striped table-bordered ">
+			<thead class="table-dark">
+				<tr>
+					<th>Student Id</th>
+					<th
+						th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+						First Name</th>
+					<th
+						th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
+						Last Name</th>
+					<th
+						th:href="@{'/page/' + ${currentPage} + '?sortField=emailId&sortDir=' + ${reverseSortDir}}">
+						Email-Id</th>
+					<th
+						th:href="@{'/page/' + ${currentPage} + '?sortField=contact&sortDir=' + ${reverseSortDir}}">
+						Contact</th>
+					<th
+						th:href="@{'/page/' + ${currentPage} + '?sortField=photo&sortDir=' + ${reverseSortDir}}">Photo</th>
+					<th
+						th:href="@{'/page/' + ${currentPage} + '?sortField=skills&sortDir=' + ${reverseSortDir}}">Skills</th>
+
+					<th>Add Project</th>
+					<th>Show Project</th>
+					<th>Delete Student</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr style="background-color: #e6f0ff" th:each="student: ${students}">
+					<td th:text="${student.id}"></td>
+					<td th:text="${student.firstName}"></td>
+					<td th:text="${student.lastName}"></td>
+					<td th:text="${student.emailId}"></td>
+					<td th:text="${student.contact}"></td>
+					<td><img th:src="@{${student.photoImagePath}}" width="60"
+						height="60" /></td>
+					<td th:text="${student.skills}"></td>
+
+					<td><a th:href="@{/createProjectPage/{id}(id=${student.id})}"
+						class="btn btn-primary">Add Project</a></td>
+					<td><a th:href="@{/projects/{id}(id=${student.id})}"
+						class="btn btn-info">Show Projects</a></td>
+					<td><a th:href="@{/deleteStudent/{id}(id=${student.id})}"
+						class="btn btn-danger">Delete Student</a></td>
+				</tr>
+			</tbody>
+
+		</table>
+		<div class=" justify-content-center">
+			<div th:if="${totalPages > 1}">
+				<div class="row col-sm-10">
+					<div class="col-sm-2">Total Rows: [[${totalItems}]]</div>
+					<div class="col-sm-1">
+						<span th:each="i: ${#numbers.sequence(1, totalPages)}"> <a
+							th:if="${currentPage != i}"
+							th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+							<span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;
+							&nbsp;
+						</span>
+					</div>
+					<div class="col-sm-1">
+						<a th:if="${currentPage < totalPages}"
+							th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+						<span th:unless="${currentPage < totalPages}">Next</span>
+					</div>
+
+					<div class="col-sm-1">
+						<a th:if="${currentPage < totalPages}"
+							th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+						<span th:unless="${currentPage < totalPages}">Last</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+</body>
+</html>

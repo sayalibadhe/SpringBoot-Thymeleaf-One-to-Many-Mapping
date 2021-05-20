@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Student Management System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<style>
+body {
+	background-image:
+		url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsYIxRelx7K8h-KDx4L7iEIA1hq1F9ixIWyA&usqp=CAU');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+tbody {
+	font-style: inherit;
+	width: max-content;
+	font-size: 15px;
+	white-space: nowrap;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: white;
+	font-weight: bold;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="#"><i class="fa fa-fw fa-home"></i>
+			Student Management System </a>
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</nav>
+	<div th:if="${value}" style="width: 700px; margin-left: 450px">
+		<h1
+			style="text-align: center; color: #00004d; padding: 10px; margin-bottom: 0px;">STUDENT
+			DETAILS</h1>
+		<img th:src="@{${student.photoImagePath}}"
+			style="margin-top: 20px; margin-left: 190px" width="350" height="350" />
+		<table class="table table-striped table-bordered"
+			style="width: 700px; height: 300px; margin-top: 20px"
+			th:cellpading="4">
+			<thead class="table-dark">
+				<tr>
+					<th>Student Id</th>
+					<th th:text="${student.id}"></th>
+				</tr>
+				<tr>
+					<th>Student First Name</th>
+					<th th:text="${student.firstName}"></th>
+				</tr>
+				<tr>
+					<th>Student Last Name</th>
+					<th th:text="${student.lastName}"></th>
+				</tr>
+				<tr>
+					<th>Student Contact</th>
+					<th th:text="${student.contact}"></th>
+				</tr>
+				<tr>
+					<th>Student Email-Id</th>
+					<th th:text="${student.emailId}"></th>
+				</tr>
+				<tr>
+					<th>Student Skills</th>
+					<th th:text="${student.skills}"></th>
+				</tr>
+		</table>
+	</div>
+	<div th:if="${!value}">Hello</div>
+</body>
+</html>
